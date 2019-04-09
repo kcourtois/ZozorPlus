@@ -17,11 +17,13 @@ class ViewController: UIViewController {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
                 if stringNumbers.count == 1 {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
+                    let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !",
+                                                    preferredStyle: .alert)
                     alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self.present(alertVC, animated: true, completion: nil)
                 } else {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
+                    let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !",
+                                                    preferredStyle: .alert)
                     alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                     self.present(alertVC, animated: true, completion: nil)
                 }
@@ -34,7 +36,8 @@ class ViewController: UIViewController {
     var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !", preferredStyle: .alert)
+                let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !",
+                                                preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 self.present(alertVC, animated: true, completion: nil)
                 return false
@@ -42,7 +45,6 @@ class ViewController: UIViewController {
         }
         return true
     }
-
 
     // MARK: - Outlets
 
@@ -52,10 +54,8 @@ class ViewController: UIViewController {
     // MARK: - Action
 
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        for (i, numberButton) in numberButtons.enumerated() {
-            if sender == numberButton {
-                addNewNumber(i)
-            }
+        for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
+            addNewNumber(index)
         }
     }
 
@@ -79,7 +79,6 @@ class ViewController: UIViewController {
         calculateTotal()
     }
 
-
     // MARK: - Methods
 
     func addNewNumber(_ newNumber: Int) {
@@ -97,27 +96,27 @@ class ViewController: UIViewController {
         }
 
         var total = 0
-        for (i, stringNumber) in stringNumbers.enumerated() {
+        for (index, stringNumber) in stringNumbers.enumerated() {
             if let number = Int(stringNumber) {
-                if operators[i] == "+" {
+                if operators[index] == "+" {
                     total += number
-                } else if operators[i] == "-" {
+                } else if operators[index] == "-" {
                     total -= number
                 }
             }
         }
 
-        textView.text = textView.text + "=\(total)"
+        textView.text += "=\(total)"
 
         clear()
     }
 
     func updateDisplay() {
         var text = ""
-        for (i, stringNumber) in stringNumbers.enumerated() {
+        for (index, stringNumber) in stringNumbers.enumerated() {
             // Add operator
-            if i > 0 {
-                text += operators[i]
+            if index > 0 {
+                text += operators[index]
             }
             // Add number
             text += stringNumber
