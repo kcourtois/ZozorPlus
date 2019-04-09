@@ -10,7 +10,6 @@ import XCTest
 @testable import CountOnMe
 
 class ZozorTests: XCTestCase {
-
     override func setUp() {
         super.setUp()
     }
@@ -20,6 +19,7 @@ class ZozorTests: XCTestCase {
     }
 
     func testExample() {
+        XCTAssertTrue(false)
     }
 
     func testPerformanceExample() {
