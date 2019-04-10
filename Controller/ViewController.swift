@@ -57,7 +57,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func equal() {
-        textView.text += calculator.calculateTotal()
+        if let total = calculator.calculateTotal() {
+            textView.text += "=\(total)"
+        }
     }
 
     // MARK: - Methods

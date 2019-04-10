@@ -12,9 +12,9 @@ class Calculator {
 
     // MARK: - Properties
 
-    var stringNumbers: [String] = [String()]
-    var operators: [String] = ["+"]
-    var index = 0
+    private var stringNumbers: [String] = [String()]
+    private var operators: [Operator] = [.plus]
+    private var index = 0
 
     var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last {
@@ -54,24 +54,24 @@ class Calculator {
 
     func addNewOperator(newOperator: Operator) -> Bool {
         if canAddOperator {
-            operators.append(newOperator.rawValue)
+            operators.append(newOperator)
             stringNumbers.append("")
             return true
         }
         return false
     }
 
-    func calculateTotal() -> String {
+    func calculateTotal() -> Int? {
         if !isExpressionCorrect {
-            return ""
+            return nil
         }
 
         var total = 0
         for (index, stringNumber) in stringNumbers.enumerated() {
             if let number = Int(stringNumber) {
-                if operators[index] == "+" {
+                if operators[index] == .plus {
                     total += number
-                } else if operators[index] == "-" {
+                } else if operators[index] == .minus {
                     total -= number
                 }
             }
@@ -79,7 +79,7 @@ class Calculator {
 
         clear()
 
-        return "=\(total)"
+        return total
     }
 
     func updateDisplay() -> String {
@@ -87,7 +87,7 @@ class Calculator {
         for (index, stringNumber) in stringNumbers.enumerated() {
             // Add operator
             if index > 0 {
-                text += operators[index]
+                text += operators[index].rawValue
             }
             // Add number
             text += stringNumber
@@ -97,7 +97,7 @@ class Calculator {
 
     func clear() {
         stringNumbers = [String()]
-        operators = ["+"]
+        operators = [.plus]
         index = 0
     }
 
