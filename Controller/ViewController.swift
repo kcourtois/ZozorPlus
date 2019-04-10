@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     // MARK: - Properties
+    let calculator = Calculator()
     var stringNumbers: [String] = [String()]
     var operators: [String] = ["+"]
     var index = 0
@@ -17,15 +18,9 @@ class ViewController: UIViewController {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
                 if stringNumbers.count == 1 {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !",
-                                                    preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertVC, animated: true, completion: nil)
+                    showAlert(message: "Démarrez un nouveau calcul !")
                 } else {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !",
-                                                    preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertVC, animated: true, completion: nil)
+                    showAlert(message: "Entrez une expression correcte !")
                 }
                 return false
             }
@@ -36,10 +31,7 @@ class ViewController: UIViewController {
     var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !",
-                                                preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alertVC, animated: true, completion: nil)
+                showAlert(message: "Expression incorrecte !")
                 return false
             }
         }
@@ -50,6 +42,21 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var numberButtons: [UIButton]!
+
+    // MARK: - Override
+
+    override func viewDidLoad() {
+        numberButtons.sort {
+            return $0.tag < $1.tag
+        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        //Notification observer for didSendAlert
+        let nameSendAlertNotif = Notification.Name(rawValue: NotificationStrings.didSendAlertNotificationName)
+        NotificationCenter.default.addObserver(self, selector: #selector(onDidSendAlert(_:)),
+                                               name: nameSendAlertNotif, object: nil)
+    }
 
     // MARK: - Action
 
@@ -128,5 +135,22 @@ class ViewController: UIViewController {
         stringNumbers = [String()]
         operators = ["+"]
         index = 0
+    }
+
+    //Triggers on notification didSelectLayout
+    @objc private func onDidSendAlert(_ notification: Notification) {
+        print("hi")
+        if let data = notification.userInfo as? [String: String] {
+            for (_, message) in data {
+                showAlert(message: message)
+            }
+        }
+    }
+
+    private func showAlert(message: String) {
+        let alertVC = UIAlertController(title: "Zéro!", message: message,
+                                        preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
 }
