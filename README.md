@@ -1,4 +1,4 @@
-![OpenClassrooms Logo](https://upload.wikimedia.org/wikipedia/fr/0/0d/Logo_OpenClassrooms.png)
+<img src="https://upload.wikimedia.org/wikipedia/fr/0/0d/Logo_OpenClassrooms.png" width="150" height="150" />
 
 [![Build Status](https://travis-ci.com/kcourtois/ZozorPlus.svg?branch=master)](https://travis-ci.com/kcourtois/ZozorPlus)
 
@@ -12,3 +12,8 @@ Students are supposed to clone or fork the repo and improve it. Their focus shou
 - MVC compliance
 - Tests
 - Bonus feature
+
+# Bonus feature
+The basic operators on this project are plus, minus and equal. The bonus will be to add :
+- Multiplication operator
+- Division operator
