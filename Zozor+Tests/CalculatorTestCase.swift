@@ -18,7 +18,7 @@ class CalculatorTestCase: XCTestCase {
     }
 
     //creates calculs alternating one int, one operator.
-    func createCalc(numbers: [Int], operators: [Operator]) {
+    private func createCalc(numbers: [Int], operators: [Operator]) {
         for (index, num) in numbers.enumerated() {
             _ = calculator.addNewNumber(num)
             let isIndexValid = operators.indices.contains(index)
@@ -31,7 +31,7 @@ class CalculatorTestCase: XCTestCase {
     // MARK: - Plus Operator
 
     func testGivenNoValueEntered_WhenAddingPlusOperator_ThenAddNewOperatorShouldReturnFalse() {
-        XCTAssertFalse(calculator.addNewOperator(newOperator: .plus))
+        XCTAssertNil(calculator.addNewOperator(newOperator: .plus))
     }
 
     func testGivenOnePlusOne_WhenCalculatingTotal_ThenShouldBeTwo() {
@@ -43,19 +43,19 @@ class CalculatorTestCase: XCTestCase {
     func testGivenOneInputAndPlusOperator_WhenAddingPlusOperator_ThenAddNewOperatorShouldReturnFalse() {
         createCalc(numbers: [1], operators: [.plus])
 
-        XCTAssertFalse(calculator.addNewOperator(newOperator: .plus))
+        XCTAssertNil(calculator.addNewOperator(newOperator: .plus))
     }
 
     func testGiverOneInputAndPlusOperator_WhenAddingPlusOperator_ThenUpdateDisplayIsCorrect() {
-        createCalc(numbers: [1], operators: [.plus])
+        XCTAssertEqual(calculator.addNewNumber(1), "1")
 
-        XCTAssertEqual(calculator.updateDisplay(), "1+")
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .plus), "1+")
     }
 
     // MARK: - Minus Operator
 
     func testGivenNoValueEntered_WhenAddingMinusOperator_ThenAddNewOperatorShouldReturnFalse() {
-        XCTAssertFalse(calculator.addNewOperator(newOperator: .minus))
+        XCTAssertNil(calculator.addNewOperator(newOperator: .minus))
     }
 
     func testGivenTwoMinusOne_WhenCalculatingTotal_ThenShouldBeOne() {
@@ -67,19 +67,19 @@ class CalculatorTestCase: XCTestCase {
     func testGivenOneInputAndMinusOperator_WhenAddingMinusOperator_ThenAddNewOperatorShouldReturnFalse() {
         createCalc(numbers: [1], operators: [.minus])
 
-        XCTAssertFalse(calculator.addNewOperator(newOperator: .minus))
+        XCTAssertNil(calculator.addNewOperator(newOperator: .minus))
     }
 
     func testGivenOneInputAndMinusOperator_WhenAddingMinusOperator_ThenUpdateDisplayIsCorrect() {
-        createCalc(numbers: [1], operators: [.minus])
+        XCTAssertEqual(calculator.addNewNumber(1), "1")
 
-        XCTAssertEqual(calculator.updateDisplay(), "1-")
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .minus), "1-")
     }
 
     // MARK: - Multiply Operator
 
     func testGivenNoValueEntered_WhenAddingMultiplyOperator_ThenAddNewOperatorShouldReturnFalse() {
-        XCTAssertFalse(calculator.addNewOperator(newOperator: .multiply))
+        XCTAssertNil(calculator.addNewOperator(newOperator: .multiply))
     }
 
     func testGivenThreeTimesThree_WhenCalculatingTotal_ThenShouldBeNine() {
@@ -87,22 +87,22 @@ class CalculatorTestCase: XCTestCase {
 
         XCTAssertEqual(calculator.calculateTotal(), 9)
     }
-    func testGivenThreePlusFourTimesTwoMinusOne_WhenCalculatingTotal_ThenShouldBeTen() {
-        createCalc(numbers: [3, 4, 2, 1], operators: [.plus, .multiply, .minus])
+    func testGivenCalculWithMultiplePriorities_WhenCalculatingTotal_ThenResultShouldBePriorityRelevant() {
+        createCalc(numbers: [3, 4, 2, 1, 6], operators: [.plus, .multiply, .minus, .multiply])
 
-        XCTAssertEqual(calculator.calculateTotal(), 10)
+        XCTAssertEqual(calculator.calculateTotal(), 5)
     }
 
     func testGivenOneInputAndMultiplyOperator_WhenAddingMultiplyOperator_ThenAddNewOperatorShouldReturnFalse() {
         createCalc(numbers: [1], operators: [.multiply])
 
-        XCTAssertFalse(calculator.addNewOperator(newOperator: .multiply))
+        XCTAssertNil(calculator.addNewOperator(newOperator: .multiply))
     }
 
     func testGivenOneInputAndMultiplyOperator_WhenAddingMultiplyOperator_ThenUpdateDisplayIsCorrect() {
-        createCalc(numbers: [1], operators: [.multiply])
+        XCTAssertEqual(calculator.addNewNumber(1), "1")
 
-        XCTAssertEqual(calculator.updateDisplay(), "1*")
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .multiply), "1*")
     }
 
     // MARK: - Equal Operator

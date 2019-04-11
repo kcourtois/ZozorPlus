@@ -38,21 +38,27 @@ class ViewController: UIViewController {
 
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         for (index, numberButton) in numberButtons.enumerated() where sender == numberButton {
-            if calculator.addNewNumber(index) {
-                updateDisplay()
+            if let textUpdate = calculator.addNewNumber(index) {
+                textView.text = textUpdate
             }
         }
     }
 
     @IBAction func plus() {
-        if calculator.addNewOperator(newOperator: .plus) {
-            updateDisplay()
+        if let textUpdate = calculator.addNewOperator(newOperator: .plus) {
+            textView.text = textUpdate
         }
     }
 
     @IBAction func minus() {
-        if calculator.addNewOperator(newOperator: .minus) {
-            updateDisplay()
+        if let textUpdate = calculator.addNewOperator(newOperator: .minus) {
+            textView.text = textUpdate
+        }
+    }
+
+    @IBAction func multiply() {
+        if let textUpdate = calculator.addNewOperator(newOperator: .multiply) {
+            textView.text = textUpdate
         }
     }
 
@@ -63,11 +69,6 @@ class ViewController: UIViewController {
     }
 
     // MARK: - Methods
-
-    //updates textView
-    func updateDisplay() {
-        textView.text = calculator.updateDisplay()
-    }
 
     //Triggers on notification didSendAlert
     @objc private func onDidSendAlert(_ notification: Notification) {
