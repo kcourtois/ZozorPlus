@@ -87,7 +87,7 @@ class CalculatorTestCase: XCTestCase {
 
         XCTAssertEqual(calculator.calculateTotal(), 9)
     }
-    func testGivenCalculWithMultiplePriorities_WhenCalculatingTotal_ThenResultShouldBePriorityRelevant() {
+    func testGivenCalculWithMultipleMultiplicationPriorities_WhenCalculatingTotal_ThenResultShouldBePriorityRelevant() {
         createCalc(numbers: [3, 4, 2, 1, 6], operators: [.plus, .multiply, .minus, .multiply])
 
         XCTAssertEqual(calculator.calculateTotal(), 5)
@@ -103,6 +103,41 @@ class CalculatorTestCase: XCTestCase {
         XCTAssertEqual(calculator.addNewNumber(1), "1")
 
         XCTAssertEqual(calculator.addNewOperator(newOperator: .multiply), "1*")
+    }
+
+    // MARK: - Divide Operator
+
+    func testGivenNoValueEntered_WhenAddingDivideOperator_ThenAddNewOperatorShouldReturnFalse() {
+        XCTAssertNil(calculator.addNewOperator(newOperator: .divide))
+    }
+
+    func testGivenThreeDividedByThree_WhenCalculatingTotal_ThenShouldBeOne() {
+        createCalc(numbers: [3, 3], operators: [.divide])
+
+        XCTAssertEqual(calculator.calculateTotal(), 1)
+    }
+    func testGivenCalculWithMultipleDivisionPriorities_WhenCalculatingTotal_ThenResultShouldBePriorityRelevant() {
+        createCalc(numbers: [3, 4, 2, 1, 6], operators: [.plus, .divide, .minus, .divide])
+        //Round down
+        XCTAssertEqual(calculator.calculateTotal(), 4)
+    }
+
+    func testGivenOneInputAndDivisionOperator_WhenAddingMultiplyOperator_ThenAddNewOperatorShouldReturnFalse() {
+        createCalc(numbers: [1], operators: [.divide])
+
+        XCTAssertNil(calculator.addNewOperator(newOperator: .divide))
+    }
+
+    func testGivenOneInputAndDivideOperator_WhenAddingMultiplyOperator_ThenUpdateDisplayIsCorrect() {
+        XCTAssertEqual(calculator.addNewNumber(1), "1")
+
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .divide), "1*")
+    }
+
+    func testGivenOneDividedByZero_WhenCalculatingTotal_ThenShouldBeInfinity() {
+        createCalc(numbers: [1, 0], operators: [.divide])
+
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .divide), "Infinity")
     }
 
     // MARK: - Equal Operator
