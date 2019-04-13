@@ -70,11 +70,9 @@ class Calculator {
             return nil
         }
 
-        if needPriorities {
-            if !calculatePriorities() {
-                clear()
-                return nil
-            }
+        if !calculatePriorities() {
+            clear()
+            return nil
         }
 
         var total = 0
@@ -85,14 +83,6 @@ class Calculator {
                     total += number
                 } else if operators[index] == .minus {
                     total -= number
-                } else if operators[index] == .multiply {
-                    total *= number
-                } else if operators[index] == .divide {
-                    if number == 0 {
-                        return nil
-                    } else {
-                        total /= number
-                    }
                 }
             }
         }
@@ -147,10 +137,12 @@ class Calculator {
                 }
             }
         }
+
         //If there are still priorities to apply, calls itself
         if needPriorities {
             return calculatePriorities()
         }
+
         return true
     }
 
