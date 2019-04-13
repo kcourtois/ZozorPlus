@@ -9,5 +9,5 @@
 import Foundation
 
 enum Operator: String {
-    case plus = "+", minus = "-", multiply = "*"
+    case plus = "+", minus = "-", multiply = "*", divide = "/"
 }

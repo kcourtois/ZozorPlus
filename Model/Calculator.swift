@@ -16,7 +16,7 @@ class Calculator {
     private var operators: [Operator] = [.plus]
     private var index = 0
 
-    var isExpressionCorrect: Bool {
+    private var isExpressionCorrect: Bool {
         if let stringNumber = stringNumbers.last, stringNumber.isEmpty {
             if stringNumbers.count == 1 {
                 postNotification(message: "Démarrez un nouveau calcul !")
@@ -28,7 +28,7 @@ class Calculator {
         return true
     }
 
-    var canAddOperator: Bool {
+    private var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last, stringNumber.isEmpty {
             postNotification(message: "Expression incorrecte !")
             return false
@@ -38,7 +38,7 @@ class Calculator {
 
     private var needPriorities: Bool {
         var count = 0
-        for ope in operators where ope == .multiply {
+        for ope in operators where ope == .multiply || ope == .divide {
             count += 1
         }
         return count > 0
@@ -71,8 +71,10 @@ class Calculator {
         }
 
         if needPriorities {
-            print("abcdef")
-            calculatePriorities()
+            if !calculatePriorities() {
+                clear()
+                return nil
+            }
         }
 
         var total = 0
@@ -85,6 +87,12 @@ class Calculator {
                     total -= number
                 } else if operators[index] == .multiply {
                     total *= number
+                } else if operators[index] == .divide {
+                    if number == 0 {
+                        return nil
+                    } else {
+                        total /= number
+                    }
                 }
             }
         }
@@ -108,9 +116,9 @@ class Calculator {
     }
 
     //Handles multiplication priorities and replace them by the result.
-    private func calculatePriorities() {
+    private func calculatePriorities() -> Bool {
         //Loop through operators to find mulitply
-        for (index, ope) in operators.enumerated() where ope == .multiply {
+        for (index, ope) in operators.enumerated() where ope == .multiply || ope == .divide {
             //define indexes for numbers that are needed in operation
             let firstIndex = index-1
             let secondIndex = index
@@ -118,10 +126,19 @@ class Calculator {
             if stringNumbers.indices.contains(firstIndex) && stringNumbers.indices.contains(secondIndex) {
                 //Get the numbers from indexes
                 if let firstNum = Int(stringNumbers[firstIndex]), let secondNum = Int(stringNumbers[secondIndex]) {
+                    var totalCalc = 0
                     //Do the operation
-                    let totalMult = firstNum * secondNum
+                    if ope == .multiply {
+                        totalCalc = firstNum * secondNum
+                    } else if ope == .divide {
+                        if secondNum == 0 {
+                            return false
+                        } else {
+                            totalCalc = firstNum / secondNum
+                        }
+                    }
                     //Remove one number and put the result in place of the old one
-                    stringNumbers[firstIndex] = "\(totalMult)"
+                    stringNumbers[firstIndex] = "\(totalCalc)"
                     stringNumbers.remove(at: secondIndex)
                     //Remove operator
                     operators.remove(at: index)
@@ -132,8 +149,9 @@ class Calculator {
         }
         //If there are still priorities to apply, calls itself
         if needPriorities {
-            calculatePriorities()
+            return calculatePriorities()
         }
+        return true
     }
 
     private func clear() {

@@ -118,26 +118,32 @@ class CalculatorTestCase: XCTestCase {
     }
     func testGivenCalculWithMultipleDivisionPriorities_WhenCalculatingTotal_ThenResultShouldBePriorityRelevant() {
         createCalc(numbers: [3, 4, 2, 1, 6], operators: [.plus, .divide, .minus, .divide])
-        //Round down
-        XCTAssertEqual(calculator.calculateTotal(), 4)
+        //Round up
+        XCTAssertEqual(calculator.calculateTotal(), 5)
     }
 
-    func testGivenOneInputAndDivisionOperator_WhenAddingMultiplyOperator_ThenAddNewOperatorShouldReturnFalse() {
+    func testGivenOneInputAndDivideOperator_WhenAddingDivideOperator_ThenAddNewOperatorShouldReturnFalse() {
         createCalc(numbers: [1], operators: [.divide])
 
         XCTAssertNil(calculator.addNewOperator(newOperator: .divide))
     }
 
-    func testGivenOneInputAndDivideOperator_WhenAddingMultiplyOperator_ThenUpdateDisplayIsCorrect() {
+    func testGivenOneInputAndDivideOperator_WhenAddingDivideOperator_ThenUpdateDisplayIsCorrect() {
         XCTAssertEqual(calculator.addNewNumber(1), "1")
 
-        XCTAssertEqual(calculator.addNewOperator(newOperator: .divide), "1*")
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .divide), "1/")
     }
 
-    func testGivenOneDividedByZero_WhenCalculatingTotal_ThenShouldBeInfinity() {
+    func testGivenOneDividedByZero_WhenCalculatingTotal_ThenResultShouldBeNil() {
         createCalc(numbers: [1, 0], operators: [.divide])
 
-        XCTAssertEqual(calculator.addNewOperator(newOperator: .divide), "Infinity")
+        XCTAssertNil(calculator.calculateTotal())
+    }
+
+    func testGivenCalculWithMultipleDivisionPrioritiesWithZero_WhenCalculatingTotal_ThenResultShouldBeNil() {
+        createCalc(numbers: [3, 4, 0, 1, 6], operators: [.plus, .divide, .minus, .divide])
+
+        XCTAssertNil(calculator.calculateTotal())
     }
 
     // MARK: - Equal Operator

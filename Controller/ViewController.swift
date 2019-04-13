@@ -25,6 +25,8 @@ class ViewController: UIViewController {
         numberButtons.sort {
             return $0.tag < $1.tag
         }
+        textView.textContainer.maximumNumberOfLines = 1
+        textView.textContainer.lineBreakMode = .byTruncatingHead
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,9 +64,17 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func divide() {
+        if let textUpdate = calculator.addNewOperator(newOperator: .divide) {
+            textView.text = textUpdate
+        }
+    }
+
     @IBAction func equal() {
         if let total = calculator.calculateTotal() {
             textView.text += "=\(total)"
+        } else {
+            textView.text += "=Error"
         }
     }
 
