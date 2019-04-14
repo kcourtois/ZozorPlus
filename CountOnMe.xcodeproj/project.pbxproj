@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E765F93225DF303005DF98B /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E765F92225DF303005DF98B /* Calculator.swift */; };
 		9E765F95225DF3AA005DF98B /* CalculatorTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E765F94225DF3AA005DF98B /* CalculatorTestCase.swift */; };
-		9E765F97225E3EE3005DF98B /* NotificationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E765F96225E3EE3005DF98B /* NotificationStrings.swift */; };
 		9E765F9A225E4884005DF98B /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E765F99225E4884005DF98B /* Operator.swift */; };
+		9E765FD92263AEF5005DF98B /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E765FD72263AEF5005DF98B /* Calculator.swift */; };
+		9E765FDA2263AEF5005DF98B /* NotificationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E765FD82263AEF5005DF98B /* NotificationStrings.swift */; };
 		C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADC1D7581BB00477020 /* AppDelegate.swift */; };
 		C926DADF1D7581BB00477020 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C926DADE1D7581BB00477020 /* ViewController.swift */; };
 		C926DAE21D7581BB00477020 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C926DAE01D7581BB00477020 /* Main.storyboard */; };
@@ -30,10 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9E765F92225DF303005DF98B /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Calculator.swift; path = Model/Calculator.swift; sourceTree = SOURCE_ROOT; };
 		9E765F94225DF3AA005DF98B /* CalculatorTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTestCase.swift; sourceTree = "<group>"; };
-		9E765F96225E3EE3005DF98B /* NotificationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationStrings.swift; path = Model/NotificationStrings.swift; sourceTree = SOURCE_ROOT; };
 		9E765F99225E4884005DF98B /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		9E765FD72263AEF5005DF98B /* Calculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		9E765FD82263AEF5005DF98B /* NotificationStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationStrings.swift; sourceTree = "<group>"; };
 		C926DAD91D7581BB00477020 /* CountOnMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountOnMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C926DADC1D7581BB00477020 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C926DADE1D7581BB00477020 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,21 +95,29 @@
 		9E765F98225E3F34005DF98B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9E765F92225DF303005DF98B /* Calculator.swift */,
-				9E765F96225E3EE3005DF98B /* NotificationStrings.swift */,
+				9E765FD72263AEF5005DF98B /* Calculator.swift */,
+				9E765FD82263AEF5005DF98B /* NotificationStrings.swift */,
 				9E765F99225E4884005DF98B /* Operator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		C926DAD01D7581BB00477020 = {
+		9E765FD62263AE9B005DF98B /* Zozor+ */ = {
 			isa = PBXGroup;
 			children = (
 				9E765F90225CCB66005DF98B /* Supporting Files */,
 				9E765F98225E3F34005DF98B /* Model */,
 				9E765F8F225CCB48005DF98B /* View */,
 				9E765F8D225CCB2E005DF98B /* Controller */,
-				C926DAF01D7581BB00477020 /* CountOnMeTests */,
+			);
+			path = "Zozor+";
+			sourceTree = "<group>";
+		};
+		C926DAD01D7581BB00477020 = {
+			isa = PBXGroup;
+			children = (
+				9E765FD62263AE9B005DF98B /* Zozor+ */,
+				C926DAF01D7581BB00477020 /* Zozor+Tests */,
 				C926DADA1D7581BB00477020 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -123,13 +131,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C926DAF01D7581BB00477020 /* CountOnMeTests */ = {
+		C926DAF01D7581BB00477020 /* Zozor+Tests */ = {
 			isa = PBXGroup;
 			children = (
 				C926DAF31D7581BB00477020 /* Info.plist */,
 				9E765F94225DF3AA005DF98B /* CalculatorTestCase.swift */,
 			);
-			name = CountOnMeTests;
 			path = "Zozor+Tests";
 			sourceTree = "<group>";
 		};
@@ -260,11 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E765FDA2263AEF5005DF98B /* NotificationStrings.swift in Sources */,
 				C926DADF1D7581BB00477020 /* ViewController.swift in Sources */,
-				9E765F97225E3EE3005DF98B /* NotificationStrings.swift in Sources */,
+				9E765FD92263AEF5005DF98B /* Calculator.swift in Sources */,
 				9E765F9A225E4884005DF98B /* Operator.swift in Sources */,
 				C926DADD1D7581BB00477020 /* AppDelegate.swift in Sources */,
-				9E765F93225DF303005DF98B /* Calculator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +424,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2746FV37H5;
-				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Zozor+/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevincourtois.CountOnMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -431,7 +438,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 2746FV37H5;
-				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Zozor+/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevincourtois.CountOnMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
