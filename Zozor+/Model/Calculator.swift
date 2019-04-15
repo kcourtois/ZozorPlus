@@ -65,7 +65,7 @@ class Calculator {
         return nil
     }
 
-    func calculateTotal() -> Int? {
+    func calculateTotal() -> Double? {
         if !isExpressionCorrect {
             return nil
         }
@@ -75,10 +75,10 @@ class Calculator {
             return nil
         }
 
-        var total = 0
+        var total = 0.0
 
         for (index, stringNumber) in stringNumbers.enumerated() {
-            if let number = Int(stringNumber) {
+            if let number = Double(stringNumber) {
                 if operators[index] == .plus {
                     total += number
                 } else if operators[index] == .minus {
@@ -89,7 +89,8 @@ class Calculator {
 
         clear()
 
-        return total
+        //returns decimal value with two digits
+        return round(total * 100) / 100
     }
 
     private func updateDisplay() -> String {
@@ -115,8 +116,9 @@ class Calculator {
             //Check if the indexes are valid
             if stringNumbers.indices.contains(firstIndex) && stringNumbers.indices.contains(secondIndex) {
                 //Get the numbers from indexes
-                if let firstNum = Int(stringNumbers[firstIndex]), let secondNum = Int(stringNumbers[secondIndex]) {
-                    var totalCalc = 0
+                if let firstNum = Double(stringNumbers[firstIndex]),
+                    let secondNum = Double(stringNumbers[secondIndex]) {
+                    var totalCalc = 0.0
                     //Do the operation
                     if ope == .multiply {
                         totalCalc = firstNum * secondNum

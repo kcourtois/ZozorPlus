@@ -111,15 +111,15 @@ class CalculatorTestCase: XCTestCase {
         XCTAssertNil(calculator.addNewOperator(newOperator: .divide))
     }
 
-    func testGivenThreeDividedByThree_WhenCalculatingTotal_ThenShouldBeOne() {
-        createCalc(numbers: [3, 3], operators: [.divide])
+    func testGivenSevenDividedByTwo_WhenCalculatingTotal_ThenShouldBeThreePointFive() {
+        createCalc(numbers: [7, 2], operators: [.divide])
 
-        XCTAssertEqual(calculator.calculateTotal(), 1)
+        XCTAssertEqual(calculator.calculateTotal(), 3.5)
     }
     func testGivenCalculWithMultipleDivisionPriorities_WhenCalculatingTotal_ThenResultShouldBePriorityRelevant() {
         createCalc(numbers: [3, 4, 2, 1, 6], operators: [.plus, .divide, .minus, .divide])
         //Round up
-        XCTAssertEqual(calculator.calculateTotal(), 5)
+        XCTAssertEqual(calculator.calculateTotal(), 4.83)
     }
 
     func testGivenOneInputAndDivideOperator_WhenAddingDivideOperator_ThenAddNewOperatorShouldReturnFalse() {
