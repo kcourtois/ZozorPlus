@@ -44,6 +44,14 @@ class Calculator {
         return count > 0
     }
 
+    private var isFirstSign: Bool {
+        if let stringNumber = stringNumbers.last, stringNumber.isEmpty && operators.count == 1 {
+            return true
+        } else {
+            return false
+        }
+    }
+
     // MARK: - Methods
 
     func addNewNumber(_ newNumber: Int) -> String? {
@@ -57,7 +65,10 @@ class Calculator {
     }
 
     func addNewOperator(newOperator: Operator) -> String? {
-        if canAddOperator {
+        if newOperator == .minus && isFirstSign {
+            operators[0] = .minus
+            return updateDisplay()
+        } else if canAddOperator {
             operators.append(newOperator)
             stringNumbers.append("")
             return updateDisplay()
@@ -95,6 +106,9 @@ class Calculator {
 
     private func updateDisplay() -> String {
         var text = ""
+        if operators[0] == .minus {
+            text = "-"
+        }
         for (index, stringNumber) in stringNumbers.enumerated() {
             // Add operator
             if index > 0 {

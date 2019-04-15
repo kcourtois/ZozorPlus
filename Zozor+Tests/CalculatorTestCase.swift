@@ -30,7 +30,7 @@ class CalculatorTestCase: XCTestCase {
 
     // MARK: - Plus Operator
 
-    func testGivenNoValueEntered_WhenAddingPlusOperator_ThenAddNewOperatorShouldReturnFalse() {
+    func testGivenNoValueEntered_WhenAddingPlusOperator_ThenAddNewOperatorShouldReturnNil() {
         XCTAssertNil(calculator.addNewOperator(newOperator: .plus))
     }
 
@@ -54,8 +54,15 @@ class CalculatorTestCase: XCTestCase {
 
     // MARK: - Minus Operator
 
-    func testGivenNoValueEntered_WhenAddingMinusOperator_ThenAddNewOperatorShouldReturnFalse() {
-        XCTAssertNil(calculator.addNewOperator(newOperator: .minus))
+    func testGivenNoValueEntered_WhenAddingMinusOperator_ThenAddNewOperatorShouldReturnMinusString() {
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .minus), "-")
+    }
+
+    func testGivenMinusOnePlusOne_WhenCalculatingTotal_ThenShouldBeZero() {
+        XCTAssertEqual(calculator.addNewOperator(newOperator: .minus), "-")
+        createCalc(numbers: [1, 1], operators: [.plus])
+
+        XCTAssertEqual(calculator.calculateTotal(), 0)
     }
 
     func testGivenTwoMinusOne_WhenCalculatingTotal_ThenShouldBeOne() {
@@ -78,7 +85,7 @@ class CalculatorTestCase: XCTestCase {
 
     // MARK: - Multiply Operator
 
-    func testGivenNoValueEntered_WhenAddingMultiplyOperator_ThenAddNewOperatorShouldReturnFalse() {
+    func testGivenNoValueEntered_WhenAddingMultiplyOperator_ThenAddNewOperatorShouldReturnNil() {
         XCTAssertNil(calculator.addNewOperator(newOperator: .multiply))
     }
 
@@ -107,7 +114,7 @@ class CalculatorTestCase: XCTestCase {
 
     // MARK: - Divide Operator
 
-    func testGivenNoValueEntered_WhenAddingDivideOperator_ThenAddNewOperatorShouldReturnFalse() {
+    func testGivenNoValueEntered_WhenAddingDivideOperator_ThenAddNewOperatorShouldReturnNil() {
         XCTAssertNil(calculator.addNewOperator(newOperator: .divide))
     }
 
